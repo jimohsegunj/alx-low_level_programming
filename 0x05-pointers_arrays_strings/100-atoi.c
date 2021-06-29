@@ -8,9 +8,9 @@
 
 int mapint(char a)
 {
-  if (a >= 48 && a <= 57)
-    return ((int)a - 48);
-  return (0);
+if (a >= 48 && a <= 57)
+return ((int)a - 48);
+return (0);
 }
 /**
  * isDigit - returns true if i is a number
@@ -19,7 +19,7 @@ int mapint(char a)
  */
 int isDigit(char i)
 {
-  return (i >= '0' && i <= '9');
+return (i >= '0' && i <= '9');
 }
 
 /**
