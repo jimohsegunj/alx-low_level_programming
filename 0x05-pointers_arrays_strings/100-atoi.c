@@ -1,42 +1,49 @@
 #include "holberton.h"
 
 /**
- * _atoi - Convert a string to integer.
- * @s: char array string
- * Description: Number in the string can be preceded by an infinite
- * number of characters.
- * You need to take into account all -/+ signs before the number.
- * If there are no numbers in the string, return 0.
- * No need to check for overflow.
- * Not allowed to hard-code special values.
- * Return: first integer found in string
+ *mapint - maps a character to its integer form
+ *@a: character to be mapped
+ *Return: the integer version of the char
  */
 
+int mapint(char a)
+{
+  if (a >= 48 && a <= 57)
+    return ((int)a - 48);
+  return (0);
+}
+/**
+ * isDigit - returns true if i is a number
+ * @i: integer i
+ * Return: true if number, false if not
+ */
+int isDigit(char i)
+{
+  return (i >= '0' && i <= '9');
+}
+
+/**
+ * _atoi - converts a string to integer
+ * @s: string s
+ * Return: returns parsed integer
+ */
 int _atoi(char *s)
 {
-int i;
-int h, p;
+unsigned int num = 0, sign = 1, started = 0;
 
-h = 0;
-p = -1;
-for (i = 0; s[i] != '\0'; i++)
+while (*s)
 {
-if (s[i] == '-')
-p *= -1;
-
-if (s[i] > 47 && s[i] < 58)
-{
-if (h < 0)
-h = (h * 10) - (s[i] - '0');
-else
-h = (s[i] - '0') * -1;
-	  
-if (s[i + 1] < 48 || s[i + 1] > 57)
+/*if a number is already countign and a non number is found break*/
+if (started && !isDigit(*s))
 break;
+if (*s == '-')
+sign *= -1;
+if (isDigit(*s))
+{
+started = 1;
+num =  num * 10 + mapint(*s);
 }
+s++;
 }
-if (p < 0)
-h *= -1;
-
-return (h);
+return (sign * num);
 }
